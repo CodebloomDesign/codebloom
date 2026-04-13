@@ -34,49 +34,6 @@ export default {
           `Message:`,
           message
         ].join('\n');
-
-      const mailResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
-          method: 'POST',
-          headers: {
-            'content-type': 'application/json'
-          },
-          body: JSON.stringify({
-            personalizations: [
-              {
-                to: [
-                  {
-                    email: 'codebloomdesign@gmail.com',
-                    name: 'CodeBloom Design'
-                  }
-                ]
-              }
-            ],
-            from: {
-              email: 'noreply@codebloomdesign.com',
-              name: 'CodeBloom Design Website'
-            },
-            subject,
-            content: [
-              {
-                type: 'text/plain',
-                value: body
-              }
-            ],
-            reply_to: {
-              email,
-              name
-            }
-          })
-        });
-const mailText = await mailResponse.text();
-
-if (!mailResponse.ok) {
-  return Response.json(
-    { success: false, message: mailText || 'Email send failed.' },
-    { status: 500 }
-  );
-}
-
         return Response.json({
           success: true,
           message: 'Message sent. We will follow up by email soon.'
