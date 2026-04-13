@@ -6,10 +6,10 @@
   "observability": {
     "enabled": true
   },
- "assets": {
-  "directory": ".",
-  "binding": "ASSETS"
-}
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS"
+  },
   "compatibility_flags": [
     "nodejs_compat"
   ]
