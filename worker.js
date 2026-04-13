@@ -34,7 +34,7 @@ export default {
           message
         ].join('\n');
 
-        await fetch('https://api.mailchannels.net/tx/v1/send', {
+      const mailResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'
@@ -67,6 +67,14 @@ export default {
             }
           })
         });
+const mailText = await mailResponse.text();
+
+if (!mailResponse.ok) {
+  return Response.json(
+    { success: false, message: mailText || 'Email send failed.' },
+    { status: 500 }
+  );
+}
 
         return Response.json({
           success: true,
